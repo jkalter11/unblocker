@@ -1,0 +1,72 @@
+<!--you probably need to save this as a html file for it to work-->
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!--definitely didnt steal css from w3schools lol-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  background-color: #B4B4B4;
+}
+body,h1 {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 120px;
+  }
+</style>
+<html> 
+  <head> 
+  <title>schoology</title>
+  <pre id="text"></pre>
+  <body>
+  <font size="+0"><p><b>Click the button, enter a website's URL.</b></p></font>
+	<button type="button" class="w3-button w3-black" onclick="promptforid()">Click me!</button>
+	<!--<button type="button" class="w3-button w3-black" onclick="promptforfile()">Click this afterwards and paste in the contents of the downloaded txt file.</button>-->
+    <br>
+    <br>
+    <iframe id = "iframe" width="668" height = "460" frameborder="0"></iframe><!--actually i need the iframe :P-->
+    </body>
+    <script src="jquery.js"></script> 
+    <script> 
+    function promptforid(){
+    		//var jason="";
+        var Url = prompt("Enter the url you wish to visit","https://www.");
+				var xhttp;  //xmlhttp request so it doesnt automatically download a txt file
+        if (window.XMLHttpRequest) {//check if not using old af browser
+          xhttp = new XMLHttpRequest();
+        }
+        document.getElementById("text").innerHTML="urls found:"+Url;
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+          	//document.getElementById("iframe").src=(this.responseText); doesnt work bc doesnt run on load 
+            var frameContentWindow=document.getElementById("iframe").contentWindow.document;
+            frameContentWindow.open();
+            frameContentWindow.write(this.responseText);
+            frameContentWindow.close();
+          }
+        };
+        xhttp.open("GET", "https://www-sites-opensocial.googleusercontent.com/gadgets/proxy/refresh=3600&container=enterprise/" + Url, true);
+        xhttp.send();
+        
+        
+        
+        //getElementById('filechoice').click();
+    }
+	/*function promptforfile(){
+    	var txt = prompt("Enter the contents of the downloaded txt file","");
+        var jason = JSON.parse(txt);
+        var vidurl = String(jason.stream[0].url);
+        document.getElementById("text").innerHTML="url found: " + vidurl;
+        document.getElementById("iframe").src=vidurl;
+    }
+    function getCaptions(apiKey, videoID){
+    	
+    }
+    */
+    
+	</script>
+  </head>
+</html>
