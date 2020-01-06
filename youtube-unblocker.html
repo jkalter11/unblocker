@@ -39,7 +39,7 @@
   <script src="jquery.js"></script>
   <script>
     function promptforid() {
-      var quality = 720;
+      var quality = 360;
       var jason = "";
       var vidurl = "";
       var txt = prompt("Enter the youtube video's id", "p7THJoRYA2c");
@@ -59,7 +59,7 @@
           if (quality == 360) {
             var vidurl = String(jason.stream[0].url);
           } else if (quality == 720) {
-            var vidurl = String(jason.adaptive[0].url);
+            var vidurl = String(jason.adaptive[0].url);//sound doesnt fkn work smh
           }
           document.getElementById("text").innerText = document.getElementById("text").innerText + "\nurls found:" + vidurl;
           document.getElementById("iframe").src = vidurl;
